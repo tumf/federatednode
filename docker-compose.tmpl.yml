@@ -12,7 +12,6 @@ services:
     image: counterparty/bitcoin:${FEDNODE_RELEASE_TAG}
     volumes:
       - ./config/bitcoin:/root/.bitcoin-config
-      - bitcoin-data:/root/.bitcoin/
     logging:
       driver: "json-file"
       options:
@@ -40,10 +39,7 @@ services:
   counterparty-base:
     image: counterparty/counterparty-server:${FEDNODE_RELEASE_TAG}
     volumes:
-      - ./src/counterparty-lib:/counterparty-lib
-      - ./src/counterparty-cli:/counterparty-cli
       - ./config/counterparty:/root/.config/counterparty
-      - counterparty-data:/root/.local/share/counterparty
     logging:
       driver: "json-file"
       options:
@@ -72,9 +68,7 @@ services:
 #    image: counterparty/counterblock:${FEDNODE_RELEASE_TAG}
     image: tumf/counterblock:${FEDNODE_RELEASE_TAG}
     volumes:
-      - ./src/counterblock:/counterblock
       - ./config/counterblock:/root/.config/counterblock
-      - counterblock-data:/root/.local/share/counterblock
     logging:
       driver: "json-file"
       options:
@@ -103,10 +97,6 @@ services:
 
   armory-utxsvr-base:
     image: counterparty/armory-utxsvr:${FEDNODE_RELEASE_TAG}
-    volumes:
-      - ./src/armory-utxsvr:/armory-utxsvr
-      - armory-data:/root/.armory
-      - bitcoin-data:/root/.bitcoin/
     logging:
       driver: "json-file"
       options:
@@ -134,9 +124,7 @@ services:
     hostname: ${HOSTNAME_BASE}-cw
     image: counterparty/counterwallet:${FEDNODE_RELEASE_TAG}
     volumes:
-      - ./src/counterwallet:/counterwallet
       - ./config/counterwallet/ssl:/ssl_config
-      - counterblock-data:/counterblock_data
     logging:
       driver: "json-file"
       options:
@@ -149,8 +137,6 @@ services:
   mongodb-base:
     hostname: ${HOSTNAME_BASE}-mongo
     image: mongo:3.2
-    volumes:
-      - mongodb-data:/data/db
     logging:
       driver: "json-file"
       options:
