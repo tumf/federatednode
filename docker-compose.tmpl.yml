@@ -69,7 +69,8 @@ services:
       - PARAMS=--config-file=/root/.config/counterparty/server.testnet.conf
 
   counterblock-base:
-    image: counterparty/counterblock:${FEDNODE_RELEASE_TAG}
+#    image: counterparty/counterblock:${FEDNODE_RELEASE_TAG}
+    image: tumf/counterblock:${FEDNODE_RELEASE_TAG}
     volumes:
       - ./src/counterblock:/counterblock
       - ./config/counterblock:/root/.config/counterblock
